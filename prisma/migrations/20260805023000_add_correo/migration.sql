@@ -1,0 +1,2 @@
+ALTER TABLE "empresas"
+ADD COLUMN "correo" TEXT NOT NULL DEFAULT '';

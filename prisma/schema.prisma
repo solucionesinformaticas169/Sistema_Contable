@@ -1,0 +1,297 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Empresa {
+  id                          Int      @id @default(autoincrement())
+  ruc                         String   @unique
+  razonSocial                 String
+  direccion                   String
+  provincia                   String
+  ciudad                      String
+  tipoNegocio                 String
+  whatsapp                    String
+  correo                      String
+  nombreComercial             String   @default("")
+  telefono1                   String   @default("")
+  telefono2                   String   @default("")
+  telefono3                   String   @default("")
+  representanteIdentificacion String   @default("")
+  representanteLegal          String   @default("")
+  contadorIdentificacion      String   @default("")
+  contador                    String   @default("")
+  agenteRetencion             String   @default("Ninguno")
+  tipoRegimen                 String   @default("GENERAL")
+  realizaAts                  Boolean  @default(true)
+  parroquia                   String   @default("")
+  logoPath                    String   @default("")
+  formatoFacturaPath          String   @default("")
+  formatoRetencionPath        String   @default("")
+  formatoGuiaRemisionPath     String   @default("")
+  formatoNotaCreditoPath      String   @default("")
+  formulaCalculoPrecios       String   @default("precio")
+  produccionTipoCosto         String   @default("op")
+  tipoManejoPrecios           String   @default("incluido_iva")
+  sumarCantidadFacturacion    Boolean  @default(true)
+  sumarCantidadTpvOffline     Boolean  @default(true)
+  sumarCantidadProforma       Boolean  @default(true)
+  sumarCantidadEntrega        Boolean  @default(true)
+  ivaPredeterminado           String   @default("15%")
+  tipoCalculoCosto            String   @default("Costo Ultima Compra")
+  almacenPredeterminado       String   @default("Almacen General")
+  transferenciasConIngreso    Boolean  @default(true)
+  permitirTransferenciaStock  Boolean  @default(true)
+  actualizarPreciosUltCompra  Boolean  @default(true)
+  permitirMultiplesTarifas    Boolean  @default(false)
+  tarifaMultimedidas          String   @default("Precio 1")
+  etiquetaUrbano              String   @default("3")
+  formatoPrecio               Int      @default(6)
+  formatoPrecioIva            Int      @default(2)
+  formatoSubtotales           Int      @default(4)
+  formatoValorIva             Int      @default(3)
+  formatoTotal                Int      @default(2)
+  formatoCosto                Int      @default(6)
+  formatoCostoSubtotales      Int      @default(4)
+  formatoCostoTotal           Int      @default(2)
+  formatoCostoValorIva        Int      @default(4)
+  formatoCantidad             Int      @default(1)
+  generaAsientosContables     Boolean  @default(true)
+  tipoModificacionAsientos    String   @default("eliminar")
+  centrosCostos               Boolean  @default(false)
+  productosSinIvaInventarioCodigo String @default("1.1.03.01.02")
+  productosSinIvaInventarioNombre String @default("Inventarios De Prod. Terminados Sin Iva")
+  productosSinIvaVentasCodigo String @default("4.1.01.02")
+  productosSinIvaVentasNombre String @default("Ventas Bienes Sin Iva")
+  productosSinIvaCostoCodigo String @default("5.1.01.01.02")
+  productosSinIvaCostoNombre String @default("Costo De Ventas Mercaderia Sin Iva")
+  productosConIvaInventarioCodigo String @default("1.1.03.01.01")
+  productosConIvaInventarioNombre String @default("Inventarios De Prod. Terminados Con Iva")
+  productosConIvaVentasCodigo String @default("4.1.01.01")
+  productosConIvaVentasNombre String @default("Ventas Bienes Con Iva")
+  productosConIvaCostoCodigo String @default("5.1.01.01.01")
+  productosConIvaCostoNombre String @default("Costo De Ventas Mercaderia Con Iva")
+  tipoContabilizacionIngresos String   @default("no_contabilizar")
+  tipoContabilizacionSalidas  String   @default("no_contabilizar")
+  ccCajasCodigo               String   @default("1.1.01.01.01")
+  ccCajasNombre               String   @default("Caja General")
+  ccBancosCodigo              String   @default("1.1.01.02.01")
+  ccBancosNombre              String   @default("Banco Pichincha")
+  ccClientesCodigo            String   @default("1.1.02.05.01")
+  ccClientesNombre            String   @default("Clientes")
+  ccProveedoresCodigo         String   @default("2.1.03.01.01")
+  ccProveedoresNombre         String   @default("Proveedores Locales")
+  ccRecepcionesCodigo         String   @default("1.1.03.01.06")
+  ccRecepcionesNombre         String   @default("Inventario Transitorio Recepciones de Compras")
+  ccIvaComprasCodigo          String   @default("1.1.05.01.01")
+  ccIvaComprasNombre          String   @default("Iva En Compras")
+  ccIvaPresuntivoCodigo       String   @default("1.1.05.01.01")
+  ccIvaPresuntivoNombre       String   @default("Iva En Compras")
+  ccIrPresuntivoCodigo        String   @default("1.1.05.01.01")
+  ccIrPresuntivoNombre        String   @default("Iva En Compras")
+  ccIceComprasCodigo          String   @default("5.3.01.20.08")
+  ccIceComprasNombre          String   @default("Ga- Impuesto Consumos Especiales Ice")
+  ccAsumeRetCodigo            String   @default("5.2.01.27.12")
+  ccAsumeRetNombre            String   @default("Gv - Gastos Retenciones Asumidas")
+  ccIvaVentasCodigo           String   @default("2.1.07.01.02.01")
+  ccIvaVentasNombre           String   @default("Iva En Ventas O Servicios")
+  ccIceVentasCodigo           String   @default("2.1.07.01.04.01")
+  ccIceVentasNombre           String   @default("ICE En Ventas")
+  ccPropinaVentasCodigo       String   @default("2.1.09.02.99")
+  ccPropinaVentasNombre       String   @default("Otras Cuentas Por Pagar Propinas")
+  ccInteresVentasCodigo       String   @default("4.2.01.99")
+  ccInteresVentasNombre       String   @default("Intereses Diferidos")
+  tipoContabilizacionCajas    String   @default("no_contabilizar")
+  tipoContabilizacionBancos   String   @default("no_contabilizar")
+  tipoContabilizacionCompras  String   @default("no_contabilizar")
+  tipoContabilizacionVentas   String   @default("no_contabilizar")
+  cobrosAnticiposCodigo       String   @default("2.1.10.01.01")
+  cobrosAnticiposNombre       String   @default("Anticipo De Cliente Cobro Cartera")
+  cobrosCruceCodigo           String   @default("1.1.02.05.04")
+  cobrosCruceNombre           String   @default("Transitoria Cruce Clientes (Siempre Cero)")
+  cobrosRetAtrasadaCodigo     String   @default("1.1.02.05.01")
+  cobrosRetAtrasadaNombre     String   @default("Clientes")
+  tipoContabilidadCobros      String   @default("no_contabilizar")
+  pagosAnticiposCodigo        String   @default("1.1.04.03.03")
+  pagosAnticiposNombre        String   @default("Anticipo Otros Proveedores")
+  pagosCruceCodigo            String   @default("2.1.03.01.03")
+  pagosCruceNombre            String   @default("Transitoria Cruce Proveedores (Siempre Cero)")
+  tipoContabilidadPagos       String   @default("no_contabilizar")
+  cajaTransitoriaCodigo       String   @default("1.1.01.01.05")
+  cajaTransitoriaNombre       String   @default("Transferencias Internas (Cero)")
+  bancosTransitoriaCodigo     String   @default("1.1.01.01.05")
+  bancosTransitoriaNombre     String   @default("Transferencias Internas (Cero)")
+  vouchersComisionCodigo      String   @default("5.2.01.27.04")
+  vouchersComisionNombre      String   @default("Gv - Comisiones Tarjetas De Credito")
+  tipoContabilizacionDepositos String  @default("no_contabilizar")
+  nominaSueldoBasico          String   @default("")
+  tipoContabilidadNomina      String   @default("departamentos")
+  obligarCupoCredito          Boolean  @default(false)
+  obligarAperturaCaja         Boolean  @default(false)
+  ingresarClaveFacturadorUnaVez Boolean @default(false)
+  visualizarComboVendedores   Boolean  @default(false)
+  controlarSaldosVencidos     Boolean  @default(false)
+  verTotalSinDescuento        Boolean  @default(false)
+  verTotalConDescuento        Boolean  @default(true)
+  porcentajeInteres           String   @default("")
+  tipoDescuentoAsignado       String   @default("producto")
+  permitirEntregasParciales   Boolean  @default(false)
+  permitirServiciosGuias      Boolean  @default(false)
+  lotesDescontarAutomatico    Boolean  @default(false)
+  ocultarFechasControlLotes   Boolean  @default(false)
+  envioAutomaticoOffline      Boolean  @default(false)
+  enviarMailCobroCliente      Boolean  @default(true)
+  enviarMailPagoProveedor     Boolean  @default(false)
+  verSaldosEstadoCartera      Boolean  @default(false)
+  aprobarPagosDosPasos        Boolean  @default(false)
+  crmClientesAgrupados        Boolean  @default(false)
+  afectarChequesCupoCredito   Boolean  @default(false)
+  obligaSeleccionarMesas      Boolean  @default(false)
+  controlaCocina              Boolean  @default(false)
+  restauranteCocina           String   @default("General")
+  restauranteBar              String   @default("General")
+  restauranteGrill            String   @default("General")
+  feAmbiente                  String   @default("Pruebas")
+  feTipoAutorizacion          String   @default("Autorizacion Offline")
+  feNumeroContribuyenteEspecial String @default("")
+  feFechaCaducaCertificado    String   @default("")
+  feLlevaContabilidad         String   @default("SI")
+  feTiempoEsperaAutorizacion  String   @default("3s")
+  feTipoFirmador              String   @default("Net")
+  feCorreoComprobacion        String   @default("")
+  feInformacionFacturas       String   @default("")
+  feSqlFacturaTipo            String   @default("SQL Estandar")
+  feSqlFacturaContenido       String   @default("select")
+  feSqlNotaCreditoContenido   String   @default("select")
+  feSqlRetencionesContenido   String   @default("select")
+  feSqlGuiaRemisionTipo       String   @default("Seleccione una Opcion")
+  feSqlGuiaRemisionContenido  String   @default("select")
+  feSqlNotaDebitoContenido    String   @default("select")
+  feSqlLiquidacionComprasContenido String @default("select")
+  smtpServidor                String   @default("smtp.zeptomail.com")
+  smtpUsuario                 String   @default("emailapikey")
+  smtpCorreoRemitente         String   @default("noresponder@perseo.ec")
+  smtpPuerto                  String   @default("587")
+  smtpClave                   String   @default("")
+  nombreDb                    String?  @unique
+  passwordHash                String?
+  createdAt                   DateTime @default(now())
+  updatedAt                   DateTime @updatedAt
+  usuarios                    Usuario[]
+  sucursales                  Sucursal[]
+  integraciones               Integracion[]
+
+  @@map("empresas")
+}
+
+model GeoProvincia {
+  id        Int         @id @default(autoincrement())
+  nombre    String      @unique
+  ciudades  GeoCiudad[]
+
+  @@map("geo_provincias")
+}
+
+model GeoCiudad {
+  id           Int            @id @default(autoincrement())
+  provinciaId  Int
+  nombre       String
+  provincia    GeoProvincia   @relation(fields: [provinciaId], references: [id], onDelete: Cascade)
+  parroquias   GeoParroquia[]
+
+  @@unique([provinciaId, nombre])
+  @@map("geo_ciudades")
+}
+
+model GeoParroquia {
+  id        Int       @id @default(autoincrement())
+  ciudadId  Int
+  nombre    String
+  ciudad    GeoCiudad @relation(fields: [ciudadId], references: [id], onDelete: Cascade)
+
+  @@unique([ciudadId, nombre])
+  @@map("geo_parroquias")
+}
+
+model Usuario {
+  id             Int      @id @default(autoincrement())
+  empresaId      Int
+  identificacion String
+  descripcion    String
+  email          String
+  activo         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  empresa        Empresa  @relation(fields: [empresaId], references: [id], onDelete: Cascade)
+  permisos       UsuarioPermiso[]
+
+  @@unique([empresaId, identificacion])
+  @@map("usuarios")
+}
+
+model UsuarioPermiso {
+  id          Int      @id @default(autoincrement())
+  usuarioId   Int
+  paginaKey   String
+  categoria   String
+  pagina      String
+  visualizar  Boolean  @default(false)
+  agregar     Boolean  @default(false)
+  modificar   Boolean  @default(false)
+  eliminar    Boolean  @default(false)
+  verCosto    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  usuario     Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@unique([usuarioId, paginaKey])
+  @@map("usuarios_permisos")
+}
+
+model Sucursal {
+  id          Int      @id @default(autoincrement())
+  empresaId   Int
+  nombre      String
+  tipo        String   @default("agencia")
+  identificacion String @default("")
+  razonSocial String   @default("")
+  telefono1   String   @default("")
+  telefono2   String   @default("")
+  metaVenta   String   @default("")
+  comisionProduccion String @default("")
+  comisionDistribucion String @default("")
+  parroquia   String   @default("")
+  responsable String   @default("")
+  ciudad      String   @default("")
+  direccion   String   @default("")
+  activo      Boolean  @default(true)
+  visible     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  empresa     Empresa  @relation(fields: [empresaId], references: [id], onDelete: Cascade)
+
+  @@unique([empresaId, nombre])
+  @@map("sucursales")
+}
+
+model Integracion {
+  id          Int      @id @default(autoincrement())
+  empresaId   Int
+  descripcion String
+  tipo        String   @default("SMTP")
+  servidor    String   @default("")
+  usuario     String   @default("")
+  contrasena  String   @default("")
+  puerto      String   @default("")
+  activo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  empresa     Empresa  @relation(fields: [empresaId], references: [id], onDelete: Cascade)
+
+  @@unique([empresaId, descripcion])
+  @@map("integraciones")
+}

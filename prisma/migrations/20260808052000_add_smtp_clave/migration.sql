@@ -1,0 +1,2 @@
+ALTER TABLE "empresas"
+ADD COLUMN "smtpClave" TEXT NOT NULL DEFAULT '';

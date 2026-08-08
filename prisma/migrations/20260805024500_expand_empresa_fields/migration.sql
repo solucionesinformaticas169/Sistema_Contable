@@ -1,0 +1,8 @@
+ALTER TABLE "empresas"
+RENAME COLUMN "descripcion" TO "tipoNegocio";
+
+ALTER TABLE "empresas"
+ADD COLUMN "direccion" TEXT NOT NULL DEFAULT '',
+ADD COLUMN "provincia" TEXT NOT NULL DEFAULT '',
+ADD COLUMN "ciudad" TEXT NOT NULL DEFAULT '',
+ADD COLUMN "whatsapp" TEXT NOT NULL DEFAULT '';

@@ -1,0 +1,18 @@
+ALTER TABLE "empresas"
+ADD COLUMN "feAmbiente" TEXT NOT NULL DEFAULT 'Pruebas',
+ADD COLUMN "feTipoAutorizacion" TEXT NOT NULL DEFAULT 'Autorizacion Offline',
+ADD COLUMN "feNumeroContribuyenteEspecial" TEXT NOT NULL DEFAULT '',
+ADD COLUMN "feFechaCaducaCertificado" TEXT NOT NULL DEFAULT '',
+ADD COLUMN "feLlevaContabilidad" TEXT NOT NULL DEFAULT 'SI',
+ADD COLUMN "feTiempoEsperaAutorizacion" TEXT NOT NULL DEFAULT '3s',
+ADD COLUMN "feTipoFirmador" TEXT NOT NULL DEFAULT 'Net',
+ADD COLUMN "feCorreoComprobacion" TEXT NOT NULL DEFAULT '',
+ADD COLUMN "feInformacionFacturas" TEXT NOT NULL DEFAULT '',
+ADD COLUMN "feSqlFacturaTipo" TEXT NOT NULL DEFAULT 'SQL Estandar',
+ADD COLUMN "feSqlFacturaContenido" TEXT NOT NULL DEFAULT 'select',
+ADD COLUMN "feSqlNotaCreditoContenido" TEXT NOT NULL DEFAULT 'select',
+ADD COLUMN "feSqlRetencionesContenido" TEXT NOT NULL DEFAULT 'select',
+ADD COLUMN "feSqlGuiaRemisionTipo" TEXT NOT NULL DEFAULT 'Seleccione una Opcion',
+ADD COLUMN "feSqlGuiaRemisionContenido" TEXT NOT NULL DEFAULT 'select',
+ADD COLUMN "feSqlNotaDebitoContenido" TEXT NOT NULL DEFAULT 'select',
+ADD COLUMN "feSqlLiquidacionComprasContenido" TEXT NOT NULL DEFAULT 'select';

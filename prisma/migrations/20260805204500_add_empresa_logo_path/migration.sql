@@ -1,0 +1,2 @@
+ALTER TABLE "empresas"
+ADD COLUMN "logoPath" TEXT NOT NULL DEFAULT '';
