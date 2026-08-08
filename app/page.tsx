@@ -20,6 +20,9 @@ export default function Home() {
                   empresa para luego continuar con usuarios, sucursales, productos,
                   clientes y toda la operacion del sistema.
                 </p>
+                <p className="mt-4 text-sm font-medium tracking-[0.12em] text-amber-800 uppercase">
+                  Actualizado el 8 de agosto de 2026
+                </p>
 
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link
