@@ -17,6 +17,14 @@ import { SidebarMenu } from "./sidebar-menu";
 import { SucursalesPanel } from "./sucursales-panel";
 import { UsuarioPermisosPanel } from "./usuario-permisos-panel";
 import { UsuariosPanel } from "./usuarios-panel";
+import { VentasAutorizarDocumentosPanel } from "./ventas-autorizar-documentos-panel";
+import { VentasClientesPanel } from "./ventas-clientes-panel";
+import { VentasEntregasParcialesPanel } from "./ventas-entregas-parciales-panel";
+import { VentasFacturacionPanel } from "./ventas-facturacion-panel";
+import { VentasEntregasPorFacturarPanel } from "./ventas-entregas-por-facturar-panel";
+import { VentasPedidosPanel } from "./ventas-pedidos-panel";
+import { VentasProspectoPanel } from "./ventas-prospecto-panel";
+import { VentasProformasPanel } from "./ventas-proformas-panel";
 
 const administrationItems = [
   { id: "gestion-empresas", label: "Gestion Empresas" },
@@ -35,8 +43,30 @@ const administrationItems = [
   { id: "actividades-sistema", label: "Actividades Sistema" },
 ];
 
+const salesItems = [
+  { id: "ventas-facturacion", label: "Facturacion" },
+  { id: "ventas-proformas", label: "Proformas" },
+  { id: "ventas-pedidos", label: "Pedidos" },
+  { id: "ventas-entregas-por-facturar", label: "Entregas por Facturar" },
+  { id: "ventas-entregas-parciales", label: "Entregas Parciales" },
+  { id: "ventas-autorizar-documentos", label: "Autorizar Documentos" },
+  { id: "ventas-clientes", label: "Clientes" },
+  { id: "ventas-prospecto", label: "Prospecto" },
+  { id: "ventas-marketing-whatsapp", label: "Marketing Whatsapp" },
+  { id: "ventas-grupo-clientes", label: "Grupo Clientes" },
+  { id: "ventas-zonas-clientes", label: "Zonas Clientes" },
+  { id: "ventas-rutas-clientes", label: "Rutas Clientes" },
+  { id: "ventas-secuencias", label: "Secuencias" },
+  { id: "ventas-agentes-ventas", label: "Agentes Ventas" },
+  { id: "ventas-tarjetas-credito", label: "Tarjetas de Credito" },
+  { id: "ventas-facturacion-por-lotes", label: "Facturacion por Lotes" },
+  { id: "ventas-facturas-servicios", label: "Facturas Servicios" },
+  { id: "ventas-localizar-vendedores", label: "Localizar Vendedores" },
+  { id: "ventas-despacho", label: "Despacho" },
+  { id: "ventas-recepcion", label: "Recepcion" },
+];
+
 const secondarySections = [
-  "Ventas",
   "Compras",
   "Tesoreria",
   "Cartera",
@@ -63,6 +93,8 @@ const facturacionElectronicaTabs = new Set([
   "nota-debito",
   "liquidacion-compras",
 ]);
+
+const salesSectionLabels = new Map(salesItems.map((item) => [item.id, item.label]));
 
 type PanelPageProps = {
   searchParams: Promise<{
@@ -578,6 +610,17 @@ export default async function PanelPage({ searchParams }: PanelPageProps) {
     seccionActual === "parametros-facturacion";
   const isParametrosFacturacionElectronicaSection =
     seccionActual === "parametros-facturacion-electronica";
+  const isVentasFacturacionSection = seccionActual === "ventas-facturacion";
+  const isVentasEntregasPorFacturarSection =
+    seccionActual === "ventas-entregas-por-facturar";
+  const isVentasEntregasParcialesSection =
+    seccionActual === "ventas-entregas-parciales";
+  const isVentasAutorizarDocumentosSection =
+    seccionActual === "ventas-autorizar-documentos";
+  const isVentasClientesSection = seccionActual === "ventas-clientes";
+  const isVentasProspectoSection = seccionActual === "ventas-prospecto";
+  const isVentasPedidosSection = seccionActual === "ventas-pedidos";
+  const isVentasProformasSection = seccionActual === "ventas-proformas";
   const isParametrosSmtpSection = seccionActual === "parametros-smtp";
   const isAdministradorSucursalesSection =
     seccionActual === "administrador-sucursales";
@@ -619,17 +662,32 @@ export default async function PanelPage({ searchParams }: PanelPageProps) {
               ? "Parametros Facturacion"
               : isParametrosFacturacionElectronicaSection
                   ? "Parametros Facturacion Electronica"
+                  : isVentasFacturacionSection
+                    ? "Facturacion"
+                  : isVentasEntregasPorFacturarSection
+                    ? "Entregas por Facturar"
+                  : isVentasEntregasParcialesSection
+                    ? "Entregas Parciales"
+                  : isVentasAutorizarDocumentosSection
+                    ? "Autorizar Documentos"
+                  : isVentasClientesSection
+                    ? "Clientes"
+                  : isVentasProspectoSection
+                    ? "Prospecto"
+                  : isVentasPedidosSection
+                    ? "Pedidos"
+                  : isVentasProformasSection
+                    ? "Proformas"
                   : isParametrosSmtpSection
                     ? "Parametros SMTP"
                     : isAdministradorSucursalesSection
                       ? "Administrador Sucursales"
                       : isIntegracionesSection
                         ? "Integraciones"
-                        : isActividadesSistemaSection
-                          ? "Actividades Sistema"
-        : isUsuariosSection
-          ? "Usuarios"
-          : "Gestion Empresas";
+                      : isActividadesSistemaSection
+                        ? "Actividades Sistema"
+                        : salesSectionLabels.get(seccionActual) ?? 
+                          (isUsuariosSection ? "Usuarios" : "Gestion Empresas");
   const moduleDescription = isPermisosSection
     ? "Define los accesos por pagina para cada usuario de la empresa activa. El borrado de usuarios es logico para conservar historial."
     : isFormatosFisicosView
@@ -654,6 +712,22 @@ export default async function PanelPage({ searchParams }: PanelPageProps) {
         ? "Configura la operacion de facturacion diaria y el flujo de restaurante."
       : isParametrosFacturacionElectronicaSection
         ? "Configura ambiente, comprobacion y SQL base para comprobantes electronicos."
+      : isVentasFacturacionSection
+        ? "Registra comprobantes de venta, controla totales, detalle de productos y datos generales del documento."
+      : isVentasEntregasPorFacturarSection
+        ? "Administra entregas pendientes de facturacion con detalle, totales y controles de series o lotes."
+      : isVentasEntregasParcialesSection
+        ? "Gestiona entregas parciales por documento, seleccion de lineas, cantidades entregadas y salida hacia guia de remision."
+      : isVentasAutorizarDocumentosSection
+        ? "Controla documentos por autorizar o autorizados, filtros por fecha y acciones operativas ligadas al flujo SRI."
+      : isVentasClientesSection
+        ? "Administra clientes con busqueda, registro, edicion, borrado logico, geolocalizacion y utilidades de importacion/exportacion."
+      : isVentasProspectoSection
+        ? "Administra prospectos con busqueda, registro, edicion y conversion del seguimiento comercial."
+      : isVentasPedidosSection
+        ? "Administra pedidos comerciales con prioridad, estado, detalle y totales recalculados."
+      : isVentasProformasSection
+        ? "Prepara proformas comerciales con cliente, detalle, observacion y totales recalculados."
       : isParametrosSmtpSection
         ? "Configura el servidor SMTP usado para correos salientes de la empresa activa."
       : isAdministradorSucursalesSection
@@ -662,9 +736,11 @@ export default async function PanelPage({ searchParams }: PanelPageProps) {
         ? "Administra conexiones externas de la empresa activa como SMTP, WhatsApp, Ecommerce y API Key."
       : isActividadesSistemaSection
         ? "Consulta movimientos recientes del sistema y filtralos por texto o por empresa."
-    : isUsuariosSection
-    ? "Administra los usuarios de la empresa activa con identificacion, descripcion y correo."
-    : "La empresa superior corresponde a la seleccion activa guardada en la base. El campo Nombre DB ahora se genera con un formato interno legible para identificar mejor cada empresa.";
+      : salesSectionLabels.has(seccionActual)
+      ? "Modulo visual inicial listo para continuar con el desarrollo funcional del area comercial."
+      : isUsuariosSection
+        ? "Administra los usuarios de la empresa activa con identificacion, descripcion y correo."
+        : "La empresa superior corresponde a la seleccion activa guardada en la base. El campo Nombre DB ahora se genera con un formato interno legible para identificar mejor cada empresa.";
 
   const actividadesSistema = isActividadesSistemaSection
     ? [
@@ -835,6 +911,7 @@ export default async function PanelPage({ searchParams }: PanelPageProps) {
             </div>
             <SidebarMenu
               administrationItems={administrationItems}
+              salesItems={salesItems}
               secondarySections={secondarySections}
               seccionActual={seccionActual}
               empresaId={empresaActual?.id}
@@ -1314,6 +1391,69 @@ export default async function PanelPage({ searchParams }: PanelPageProps) {
                     }}
                   />
                 )
+              ) : isVentasFacturacionSection && empresaActual ? (
+                <VentasFacturacionPanel
+                  empresa={{
+                    id: empresaActual.id,
+                    razonSocial: empresaActual.razonSocial,
+                    ciudad: empresaActual.ciudad,
+                  }}
+                />
+              ) : isVentasEntregasPorFacturarSection && empresaActual ? (
+                <VentasEntregasPorFacturarPanel
+                  empresa={{
+                    id: empresaActual.id,
+                    razonSocial: empresaActual.razonSocial,
+                    ciudad: empresaActual.ciudad,
+                  }}
+                />
+              ) : isVentasEntregasParcialesSection && empresaActual ? (
+                <VentasEntregasParcialesPanel
+                  empresa={{
+                    id: empresaActual.id,
+                    razonSocial: empresaActual.razonSocial,
+                    ciudad: empresaActual.ciudad,
+                  }}
+                />
+              ) : isVentasAutorizarDocumentosSection && empresaActual ? (
+                <VentasAutorizarDocumentosPanel
+                  empresa={{
+                    id: empresaActual.id,
+                    razonSocial: empresaActual.razonSocial,
+                  }}
+                />
+              ) : isVentasClientesSection && empresaActual ? (
+                <VentasClientesPanel
+                  empresa={{
+                    id: empresaActual.id,
+                    razonSocial: empresaActual.razonSocial,
+                    ciudad: empresaActual.ciudad,
+                  }}
+                />
+              ) : isVentasProspectoSection && empresaActual ? (
+                <VentasProspectoPanel
+                  empresa={{
+                    id: empresaActual.id,
+                    razonSocial: empresaActual.razonSocial,
+                    ciudad: empresaActual.ciudad,
+                  }}
+                />
+              ) : isVentasPedidosSection && empresaActual ? (
+                <VentasPedidosPanel
+                  empresa={{
+                    id: empresaActual.id,
+                    razonSocial: empresaActual.razonSocial,
+                    ciudad: empresaActual.ciudad,
+                  }}
+                />
+              ) : isVentasProformasSection && empresaActual ? (
+                <VentasProformasPanel
+                  empresa={{
+                    id: empresaActual.id,
+                    razonSocial: empresaActual.razonSocial,
+                    ciudad: empresaActual.ciudad,
+                  }}
+                />
               ) : isParametrosSmtpSection && empresaActual ? (
                 isSmtpFormatosFisicosView ? (
                   <FormatosFisicosPanel
