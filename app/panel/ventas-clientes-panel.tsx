@@ -775,7 +775,7 @@ export function VentasClientesPanel({ empresa }: VentasClientesPanelProps) {
 
   function handleTemplateDownload() {
     const link = document.createElement("a");
-    link.href = "/uploads/importar-clientes.xlsx";
+    link.href = "/api/download?file=importar-clientes.xlsx";
     link.download = "Importar Clientes.xlsx";
     document.body.appendChild(link);
     link.click();

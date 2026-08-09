@@ -240,7 +240,7 @@ export function VentasProspectoPanel({
 
   function handleExportExcel() {
     const link = document.createElement("a");
-    link.href = "/uploads/listado-clientes-prospectos.xlsx";
+    link.href = "/api/download?file=listado-clientes-prospectos.xlsx";
     link.download = "Listado clientes_prospectos.xlsx";
     document.body.appendChild(link);
     link.click();
